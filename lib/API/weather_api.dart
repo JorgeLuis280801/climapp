@@ -4,7 +4,7 @@ import 'package:climapp/models/weather_model.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherAPI {
-  Uri link = Uri.parse('api.openweathermap.org/data/2.5/forecast?cnt=8&units=metric&lang=es&lat=19.4326296&lon=-99.1331785&appid=5108ff74cd677c638147f2c6f053e7ae');
+  Uri link = Uri.parse('https://api.openweathermap.org/data/2.5/forecast?cnt=8&units=metric&lat=19.4326296&lon=-99.1331785&appid=5108ff74cd677c638147f2c6f053e7ae');
 
   Future<List<Temp>?> getTemp() async {
   try {

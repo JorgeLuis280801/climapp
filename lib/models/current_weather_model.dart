@@ -52,32 +52,33 @@ class Coord {
 }
 
 class CTemp {
-    double? temp;
-    double? feelsLike;
-    double? tempMin;
-    double? tempMax;
-    int? pressure;
-    int? humidity;
+    double temp;
+    double feelsLike;
+    double tempMin;
+    double tempMax;
+    int pressure;
+    int humidity;
 
     CTemp({
-        this.temp,
-        this.feelsLike,
-        this.tempMin,
-        this.tempMax,
-        this.pressure,
-        this.humidity,
+        required this.temp,
+        required this.feelsLike,
+        required this.tempMin,
+        required this.tempMax,
+        required this.pressure,
+        required this.humidity,
     });
 
     factory CTemp.fromMap(Map<String, dynamic> map){
       return CTemp(
         temp: map['temp'],
-        feelsLike: map['feelsLike'],
+        feelsLike: map['feels_like'],
         tempMin: map['temp_min'],
         tempMax: map['temp_max'],
         pressure: map['pressure'],
         humidity: map['humidity'],
       );
     }
+
 
 }
 
@@ -110,6 +111,15 @@ class Weather {
         this.description,
         this.icon,
     });
+
+    factory Weather.fromMap(Map<String, dynamic> map){
+      return Weather(
+        id: map['id'],
+        main: map['main'],
+        description: map['description'],
+        icon: map['icon']
+      );
+    }
 
 }
 

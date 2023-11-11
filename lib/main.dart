@@ -1,4 +1,5 @@
 import 'package:climapp/routes.dart';
+import 'package:climapp/screens/prueba.dart';
 import 'package:climapp/screens/weather.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: getRoutes(),
-      home: WeatherScreen(),
+      home: WeatherListScreen()
     );
   }
 }
