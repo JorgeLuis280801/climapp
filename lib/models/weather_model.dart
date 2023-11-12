@@ -84,7 +84,6 @@ class ListElement {
   Wind? wind;
   int? visibility;
   double? pop;
-  Rain? rain;
   Sys? sys;
   DateTime? dtTxt;
 
@@ -96,7 +95,6 @@ class ListElement {
     this.wind,
     this.visibility,
     this.pop,
-    this.rain,
     this.sys,
     this.dtTxt,
   });
@@ -110,7 +108,6 @@ class ListElement {
       wind: Wind.fromMap(map['wind']),
       visibility: map['visibility'],
       pop: map['pop'].toDouble(),
-      rain: Rain.fromMap(map['rain']),
       sys: Sys.fromMap(map['sys']),
       dtTxt: DateTime.parse(map['dt_txt']),
     );

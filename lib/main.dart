@@ -1,6 +1,5 @@
 import 'package:climapp/routes.dart';
 import 'package:climapp/screens/prueba.dart';
-import 'package:climapp/screens/weather.dart';
 import 'package:flutter/material.dart';
 
 void main() {

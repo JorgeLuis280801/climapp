@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class WeatherAPI {
   Uri link = Uri.parse('https://api.openweathermap.org/data/2.5/forecast?cnt=8&units=metric&lat=19.4326296&lon=-99.1331785&appid=5108ff74cd677c638147f2c6f053e7ae');
 
-  Future<List<Temp>?> getTemp() async {
+  Future<List<ListElement>?> getTemp() async {
   try {
     var response = await http.get(link);
 
@@ -14,8 +14,17 @@ class WeatherAPI {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);
 
       final List<dynamic>? tempData = jsonResponse['list'];
+
       if (tempData != null) {
-        return tempData.map((temp) => Temp.fromMap(temp['main'])).toList();
+        List<ListElement> processedData = tempData
+            .map((temp) => ListElement.fromMap(temp as Map<String, dynamic>))
+            .toList();
+        
+        print('Datos procesados: $processedData');
+
+        return processedData;
+      } else {
+        print('Datos nulos');
       }
     } else {
       print('Error: ${response.statusCode}');
@@ -26,5 +35,6 @@ class WeatherAPI {
 
   return null;
 }
+
 
 }
