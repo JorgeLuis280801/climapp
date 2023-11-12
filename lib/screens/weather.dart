@@ -11,7 +11,8 @@ class WeatherListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Temperaturas'),
+        centerTitle: true,
+        title: const Text('Climapp', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30), textAlign: TextAlign.center),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -31,13 +32,42 @@ class WeatherListScreen extends StatelessWidget {
                 child: 
                     ListView(
                       children: [
+                        Container(
+                          margin: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 19, 166, 219).withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Center(
+                            child: 
+                              Text('Bienvenido el clima en estos momentos es', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30), textAlign: TextAlign.center,)
+                          ),
+                        ),
                         _currentWeather(temperatures),
-                        _buildWeatherList(temperatures)
+                        const Divider(
+                              thickness: 5,
+                              color: Colors.white,
+                        ),
+                        _weatherData(temperatures),
+                        const Divider(
+                              thickness: 5,
+                              color: Colors.white,
+                        ),
+                        _buildWeatherList(temperatures),
+                        const Divider(
+                              thickness: 5,
+                              color: Colors.white,
+                        ),
+                        ElevatedButton(
+                          onPressed: (){}, 
+                          child: const Text('Acceder al mapa', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))
+                        )
                       ],
                     )
                 );
             } else {
-              return Center(child: Text('No hay datos disponibles'));
+              return const Center(child: Text('No hay datos disponibles'));
             }
           },
         ),
@@ -55,7 +85,7 @@ class WeatherListScreen extends StatelessWidget {
             margin: EdgeInsets.all(8.0),
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+              color: Color.fromARGB(255, 19, 166, 219).withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -87,18 +117,15 @@ class WeatherListScreen extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Color.fromARGB(255, 19, 166, 219).withOpacity(0.5),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Image(
+            Image(
               image: AssetImage(getWeatherImage(weatherDescription.toString())),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text('${weatherDescription ?? 'Descripción no disponible'}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
@@ -122,6 +149,88 @@ class WeatherListScreen extends StatelessWidget {
           ), 
         ],
       ),
+    );
+  }
+
+  Widget _weatherData(List<ListElement>? temperatures){
+    ListElement? current = temperatures![0];
+    String? weatherDescription = current.weather?[0].description;
+    return Container(
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 19, 166, 219).withOpacity(0.5),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 12),
+                    child: Icon(Icons.wind_power, size: 40, color: Colors.white,),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, right: 12),
+                    child: Text('Wind Speed', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 12),
+                    child: Text('${current.wind!.speed} km/h', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 12),
+                    child: Icon(Icons.water_sharp, size: 40, color: Colors.white,),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, right: 12),
+                    child: Text('Sea Level', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 12),
+                    child: Text('${current.temp!.seaLevel} ms nm', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 12),
+                    child: Icon(Icons.water_drop, size: 40, color: Colors.white,),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, right: 12),
+                    child: Text('Humidity', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 12),
+                    child: Text('${current.temp!.humidity}%', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 12),
+                    child: Icon(Icons.visibility, size: 40, color: Colors.white,),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, right: 12),
+                    child: Text('Visibility', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 12),
+                    child: Text('${current.visibility} km', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ),
+            ],
+          )
     );
   }
 
